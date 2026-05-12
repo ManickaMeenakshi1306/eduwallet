@@ -2,22 +2,22 @@ name: EduWallet CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
-    environment: production
+    # CRITICAL: This links the job to the Environment you configured in Settings
+    environment: production 
 
     env:
-      # App Secrets
+      # Map Environment Secrets to Terraform Variables
       TF_VAR_supabase_url: ${{ secrets.SUPABASE_URL }}
       TF_VAR_supabase_key: ${{ secrets.SUPABASE_KEY }}
       TF_VAR_gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
       TF_VAR_azure_storage_connection_string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
 
-      # Azure Auth for Terraform
+      # Azure Service Principal Auth for the Terraform Provider
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -35,6 +35,7 @@ jobs:
       - name: Azure Login
         uses: azure/login@v2
         with:
+          # Required for internal Azure CLI commands if needed
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Terraform Setup
