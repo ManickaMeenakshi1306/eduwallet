@@ -11,10 +11,23 @@ jobs:
     environment: production
 
     env:
+      # Standard Env Vars for Python/App
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+
+      # Mapping Secrets to Terraform Variables
+      TF_VAR_supabase_url: ${{ secrets.SUPABASE_URL }}
+      TF_VAR_supabase_key: ${{ secrets.SUPABASE_KEY }}
+      TF_VAR_gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+      TF_VAR_azure_storage_connection_string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+
+      # Azure Authentication for Terraform
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
     steps:
       - name: Checkout Repository
@@ -48,6 +61,15 @@ jobs:
         working-directory: terraform
         run: terraform validate
 
+      - name: Terraform Plan
+        working-directory: terraform
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        working-directory: terraform
+        run: terraform apply -auto-approve tfplan
+
       - name: Deployment Stage
         run: |
-          echo "Deploying EduWallet application..."
+          echo "Infrastructure deployed successfully."
