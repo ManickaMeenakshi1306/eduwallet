@@ -20,5 +20,5 @@ variable "azure_storage_connection_string" {
 
 variable "location" {
   type    = string
-  default = "East US"
+  default = "Korean Central"
 }
