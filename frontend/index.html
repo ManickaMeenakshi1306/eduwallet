@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskAligner - Premium Auth</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- Floating Background Icons -->
+<div class="floating-icon" style="top: 10%; left: 5%; animation-duration: 25s;"><i data-lucide="shield"></i></div>
+<div class="floating-icon" style="top: 30%; left: 85%; animation-duration: 18s;"><i data-lucide="lock"></i></div>
+<div class="floating-icon" style="top: 60%; left: 8%; animation-duration: 28s;"><i data-lucide="key"></i></div>
+<div class="floating-icon" style="top: 85%; left: 75%; animation-duration: 22s;"><i data-lucide="globe"></i></div>
+
+<div class="auth-split-container">
+  
+  <!-- Form Side -->
+  <div class="auth-form-side">
+    <div class="auth-card">
+      <h1 class="logo" style="margin-bottom: 0.5rem;">TaskAligner</h1>
+      <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem;">Professional ecosystem for collaboration.</p>
+
+      <div class="tabs">
+        <button id="loginTab" class="active" onclick="showLogin()">Sign In</button>
+        <button id="registerTab" onclick="showRegister()">Join Now</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="loginForm">
+        <input id="loginEmail" type="email" placeholder="Email">
+        <input id="loginPassword" type="password" placeholder="Password">
+        <button class="primary-btn" onclick="login()" style="width: 100%;">Sign In</button>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="registerForm" style="display:none;">
+        <input id="registerEmail" type="email" placeholder="Email">
+        <input id="registerPassword" type="password" placeholder="Password">
+        <button class="primary-btn" onclick="register()" style="width: 100%;">Agree & Join</button>
+      </div>
+
+      <div style="margin-top: 2rem; text-align: center; border-top: 1px solid #eee; padding-top: 2rem;">
+        <button class="primary-btn" style="background: #fff; color: var(--primary); border: 1px solid var(--primary); width: 100%;" onclick="demoLogin()">
+          Quick Access (Demo)
+        </button>
+      </div>
+
+      <p id="message" class="message" style="margin-top: 1rem; text-align: center; color: #d93025; font-size: 0.85rem;"></p>
+    </div>
+  </div>
+
+  <!-- Showcase Side -->
+  <div class="showcase-side" style="padding: 4rem; flex-direction: column; align-items: flex-start;">
+    <h2 style="font-size: 3rem; margin-bottom: 1.5rem; line-height: 1.1;">Welcome to your professional community</h2>
+    <p style="font-size: 1.2rem; opacity: 0.9; max-width: 500px;">Connect with experts, share high-value assets, and grow your career with TaskAligner.</p>
+  </div>
+
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<script src="js/auth.js"></script>
+</body>
+
+</html>
+

@@ -1,0 +1,410 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #f3f2ef; /* LinkedIn background */
+  --surface: #ffffff;
+  --primary: #0a66c2; /* LinkedIn Blue */
+  --primary-hover: #004182;
+  --secondary: #057642; /* LinkedIn Green */
+  --accent: #70b5f9;
+  --text: #000000;
+  --text-muted: #666666;
+  --glass-border: #e0e0e0;
+  --sidebar-width: 260px;
+  --card-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.08);
+}
+
+* {
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+}
+
+/* Sidebar - Google Drive Style */
+.sidebar {
+  width: var(--sidebar-width);
+  background: #ffffff;
+  border-right: 1px solid var(--glass-border);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Google Drive Style 'New' Button */
+.new-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 1px 3px 0 rgba(60,64,67,0.30), 0 4px 8px 3px rgba(60,64,67,0.15);
+  border: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #3c4043;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  width: fit-content;
+}
+
+.new-btn:hover {
+  background: #f8f9fa;
+  box-shadow: 0 1px 3px 0 rgba(60,64,67,0.30), 0 4px 8px 3px rgba(60,64,67,0.20);
+}
+
+/* Sleek Loader with Rolling Cat */
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.rolling-cat {
+  font-size: 3rem;
+  animation: roll 1.5s linear infinite;
+  display: inline-block;
+}
+
+@keyframes roll {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.sleek-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.sleek-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 24px;
+  border-radius: 0 24px 24px 0;
+  color: #3c4043;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.85rem;
+  margin-left: -1rem;
+  width: calc(100% + 1rem);
+}
+
+.nav-item.active {
+  background: #e8f0fe;
+  color: #1967d2;
+}
+
+.nav-item i {
+  width: 20px;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: 2rem 3rem;
+  width: calc(100% - var(--sidebar-width));
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.top-bar h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Stats Cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 4px;
+  display: block;
+}
+
+/* LinkedIn Style Post Card */
+.post-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--card-shadow);
+}
+
+.post-header {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 0.8rem;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  background: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  color: #fff;
+  background: var(--primary);
+}
+
+.post-user-info h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #000;
+}
+
+.post-user-info span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.post-content {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.post-media {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-actions {
+  display: flex;
+  border-top: 1px solid #ebebeb;
+  margin-top: 0.8rem;
+  padding-top: 0.4rem;
+}
+
+.action-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.action-item:hover {
+  background: #f3f3f3;
+}
+
+/* Google Drive Style File Card */
+.glass-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid transparent;
+}
+
+.glass-card:hover {
+  border-color: var(--accent);
+  background: #f8fbff;
+}
+
+/* Buttons */
+.primary-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.primary-btn:hover {
+  background: var(--primary-hover);
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 900px;
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+/* Auth Pages */
+.auth-split-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.auth-form-side {
+  flex: 1;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.showcase-side {
+  flex: 1;
+  background: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.tabs button.active {
+  border-bottom-color: var(--primary);
+  color: var(--primary);
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+/* Tags */
+.tag {
+  background: #e1e9ee;
+  color: #5e5e5e;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-right: 4px;
+}
+
+
+

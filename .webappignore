@@ -1,0 +1,11 @@
+venv/
+.env
+__pycache__/
+*.pyc
+eduwallet.zip
+Dockerfile
+auth_test.py
+test.py
+t1.py
+check_models.py
+alter_users.sql
