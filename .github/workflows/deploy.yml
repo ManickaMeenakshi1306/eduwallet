@@ -27,7 +27,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install fastapi uvicorn requests terraform
+          pip install fastapi uvicorn requests
 
       - name: Build Stage
         run: |
@@ -50,4 +50,4 @@ jobs:
 
       - name: Deployment Stage
         run: |
-          echo "Deploying EduWallet..."
+          echo "Deploying EduWallet application..."
