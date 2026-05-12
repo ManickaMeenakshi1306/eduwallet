@@ -1,0 +1,48 @@
+name: EduWallet CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    environment: production
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          pip install fastapi uvicorn requests
+
+      - name: Build Step
+        run: |
+          echo "Building EduWallet project..."
+
+      - name: Test Step
+        run: |
+          python -m py_compile main.py
+
+      - name: Terraform Setup
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: terraform
+
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: terraform
+
+      - name: Deployment Step
+        run: |
+          echo "Deploying EduWallet application..."
