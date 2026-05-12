@@ -8,11 +8,16 @@ on:
 jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
-
     environment: production
 
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Python
@@ -20,15 +25,15 @@ jobs:
         with:
           python-version: 3.11
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
-          pip install fastapi uvicorn requests
+          pip install fastapi uvicorn requests terraform
 
-      - name: Build Step
+      - name: Build Stage
         run: |
-          echo "Building EduWallet project..."
+          echo "Building EduWallet application..."
 
-      - name: Test Step
+      - name: Test Stage
         run: |
           python -m py_compile main.py
 
@@ -36,13 +41,13 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform init
         working-directory: terraform
+        run: terraform init
 
       - name: Terraform Validate
-        run: terraform validate
         working-directory: terraform
+        run: terraform validate
 
-      - name: Deployment Step
+      - name: Deployment Stage
         run: |
-          echo "Deploying EduWallet application..."
+          echo "Deploying EduWallet..."
