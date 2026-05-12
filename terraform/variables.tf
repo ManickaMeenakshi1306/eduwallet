@@ -17,3 +17,8 @@ variable "azure_storage_connection_string" {
   type      = string
   sensitive = true
 }
+
+variable "location" {
+  type    = string
+  default = "East US"
+}
