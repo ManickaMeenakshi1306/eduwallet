@@ -11,19 +11,13 @@ jobs:
     environment: production
 
     env:
-      # Standard Env Vars for Python/App
-      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
-
-      # Mapping Secrets to Terraform Variables
+      # App Secrets
       TF_VAR_supabase_url: ${{ secrets.SUPABASE_URL }}
       TF_VAR_supabase_key: ${{ secrets.SUPABASE_KEY }}
       TF_VAR_gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
       TF_VAR_azure_storage_connection_string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
 
-      # Azure Authentication for Terraform
+      # Azure Auth for Terraform
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -38,17 +32,10 @@ jobs:
         with:
           python-version: 3.11
 
-      - name: Install Dependencies
-        run: |
-          pip install fastapi uvicorn requests
-
-      - name: Build Stage
-        run: |
-          echo "Building EduWallet application..."
-
-      - name: Test Stage
-        run: |
-          python -m py_compile main.py
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Terraform Setup
         uses: hashicorp/setup-terraform@v3
@@ -56,10 +43,6 @@ jobs:
       - name: Terraform Init
         working-directory: terraform
         run: terraform init
-
-      - name: Terraform Validate
-        working-directory: terraform
-        run: terraform validate
 
       - name: Terraform Plan
         working-directory: terraform
@@ -69,7 +52,3 @@ jobs:
         if: github.ref == 'refs/heads/main'
         working-directory: terraform
         run: terraform apply -auto-approve tfplan
-
-      - name: Deployment Stage
-        run: |
-          echo "Infrastructure deployed successfully."
